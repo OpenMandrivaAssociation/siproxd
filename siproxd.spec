@@ -1,11 +1,11 @@
 Summary:	A SIP masquerading proxy with RTP support
 Name:		siproxd
-Version:	0.5.13
-Release:	%mkrel 2
+Version:	0.6.0
+Release:	%mkrel 1
 License:	GPL
 Group:		System/Servers
 URL:		http://siproxd.sourceforge.net/
-Source0:	http://prdownloads.sourceforge.net/siproxd/%{name}-%{version}.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/siproxd/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 # http://siproxd.sourceforge.net/siproxd_guide/
 Source2:	siproxd_guide.tar.bz2

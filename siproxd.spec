@@ -17,7 +17,6 @@ Requires(postun): rpm-helper
 BuildRequires:	libosip-devel >= 2.0.9
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 Siprox is an proxy/masquerading daemon for the SIP protocol.

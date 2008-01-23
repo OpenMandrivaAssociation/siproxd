@@ -1,15 +1,13 @@
 Summary:	A SIP masquerading proxy with RTP support
 Name:		siproxd
-Version:	0.6.0
+Version:	0.7.0
 Release:	%mkrel 1
 License:	GPL
 Group:		System/Servers
 URL:		http://siproxd.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/siproxd/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
-# http://siproxd.sourceforge.net/siproxd_guide/
-Source2:	siproxd_guide.tar.bz2
-Patch0:		siproxd-0.5.11-no_docs.diff
+Patch0:		siproxd_guide.patch
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 Requires(pre): rpm-helper
@@ -17,6 +15,7 @@ Requires(postun): rpm-helper
 BuildRequires:	libosip-devel >= 2.0.9
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5
+BuildRequires:	docbook-dtd42-sgml
 
 %description
 Siprox is an proxy/masquerading daemon for the SIP protocol.
@@ -28,17 +27,12 @@ an IP masquerading firewall or router.
 
 %prep
 
-%setup -q -a2
-%patch0 -p0
-
-cp %{SOURCE1} %{name}.init
+%setup -q
+%patch0 -p1
 
 %build
-aclocal; autoheader; automake -a; autoconf
 
-%configure2_5x \
-    --bindir=%{_sbindir} \
-    --sbindir=%{_sbindir}
+%configure
 
 %make
 
@@ -52,7 +46,7 @@ install -d %{buildroot}%{_localstatedir}/%{name}
 install -d %{buildroot}%{_initrddir}
 install -d %{buildroot}%{_sbindir}
 
-install -m0755 %{name}.init %{buildroot}%{_initrddir}/%{name}
+install -m0755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 
 # fix config
 install -m0644 doc/siproxd.conf.example %{buildroot}%{_sysconfdir}/siproxd.conf
@@ -78,12 +72,12 @@ perl -pi -e "s|^user =.*|user = %{name}|g" %{buildroot}%{_sysconfdir}/siproxd.co
 %defattr(-, root, root)
 %doc AUTHORS ChangeLog README RELNOTES TODO
 %doc doc/FLI4L_HOWTO.txt doc/KNOWN_BUGS doc/RFC3261_compliance.txt doc/sample_cfg_budgetone.txt
-%doc doc/sample_cfg_x-lite.txt doc/siproxd_guide.sgml siproxd_guide/*.html
-%attr(0755,root,root) %{_initrddir}/%{name}
+%doc doc/sample_cfg_x-lite.txt doc/siproxd_guide.sgml doc/html/*.html
+%{_initrddir}/%{name}
 %attr(0640,root,root) %config(noreplace) %{_sysconfdir}/%{name}.conf
+%attr(0640,root,root) %{_sysconfdir}/%{name}.conf.example
 %attr(0640,root,root) %config(noreplace) %{_sysconfdir}/%{name}_passwd.cfg
-%attr(0755,root,root) %{_sbindir}/%{name}
-%dir %attr(0755,%{name},%{name}) %{_localstatedir}/%{name}
-%dir %attr(0755,%{name},%{name}) %{_var}/run/%{name}
-
+%{_sbindir}/%{name}
+%dir %{_localstatedir}/%{name}
+%dir %{_var}/run/%{name}
 

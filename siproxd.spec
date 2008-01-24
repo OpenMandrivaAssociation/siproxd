@@ -15,6 +15,8 @@ Requires(postun): rpm-helper
 BuildRequires:	libosip2-devel >= 3.0.3
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5
+BuildRequires:	docbook-utils
+BuildRequires:	docbook-utils-pdf
 BuildRequires:	docbook-dtd42-sgml
 
 %description
@@ -72,7 +74,8 @@ perl -pi -e "s|^user =.*|user = %{name}|g" %{buildroot}%{_sysconfdir}/siproxd.co
 %defattr(-, root, root)
 %doc AUTHORS ChangeLog README RELNOTES TODO
 %doc doc/FLI4L_HOWTO.txt doc/KNOWN_BUGS doc/RFC3261_compliance.txt doc/sample_cfg_budgetone.txt
-%doc doc/sample_cfg_x-lite.txt doc/siproxd_guide.sgml doc/html/*.html
+%doc doc/sample_cfg_x-lite.txt doc/siproxd_guide.sgml
+%doc doc/html/*.html doc/pdf/*.pdf
 %{_initrddir}/%{name}
 %attr(0640,root,root) %config(noreplace) %{_sysconfdir}/%{name}.conf
 %attr(0640,root,root) %{_sysconfdir}/%{name}.conf.example

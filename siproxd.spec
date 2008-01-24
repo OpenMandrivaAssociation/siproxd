@@ -12,7 +12,7 @@ Requires(post): rpm-helper
 Requires(preun): rpm-helper
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
-BuildRequires:	libosip-devel >= 2.0.9
+BuildRequires:	libosip2-devel >= 3.0.3
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5
 BuildRequires:	docbook-dtd42-sgml

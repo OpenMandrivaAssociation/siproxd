@@ -1,14 +1,15 @@
 Summary:	A SIP masquerading proxy with RTP support
 Name:		siproxd
 Version:	0.7.0
-Release:	%mkrel 1
-License:	GPL
+Release:	%mkrel 2
+License:	GPLv2+
 Group:		System/Servers
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://siproxd.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/siproxd/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Patch0:		siproxd_guide.patch
+Patch1:		md5_prefix-479613.diff
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 Requires(pre): rpm-helper
@@ -32,17 +33,17 @@ an IP masquerading firewall or router.
 
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
-
-%configure
+%configure2_5x
 
 %make
 
 %install
 [ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
 
-%makeinstall
+%makeinstall_std
 
 install -d %{buildroot}%{_var}/run/%{name}
 install -d %{buildroot}%{_localstatedir}/%{name}

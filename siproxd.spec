@@ -46,7 +46,7 @@ an IP masquerading firewall or router.
 %makeinstall_std
 
 install -d %{buildroot}%{_var}/run/%{name}
-install -d %{buildroot}%{_localstatedir}/%{name}
+install -d %{buildroot}%{_localstatedir}/lib/%{name}
 install -d %{buildroot}%{_initrddir}
 install -d %{buildroot}%{_sbindir}
 
@@ -58,7 +58,7 @@ install -m0644 doc/siproxd_passwd.cfg %{buildroot}%{_sysconfdir}/siproxd_passwd.
 perl -pi -e "s|^user =.*|user = %{name}|g" %{buildroot}%{_sysconfdir}/siproxd.conf
 
 %pre
-%_pre_useradd %{name} %{_localstatedir}/%{name} /bin/false
+%_pre_useradd %{name} %{_localstatedir}/lib/%{name} /bin/false
 
 %post
 %_post_service %{name}
@@ -83,6 +83,6 @@ perl -pi -e "s|^user =.*|user = %{name}|g" %{buildroot}%{_sysconfdir}/siproxd.co
 %attr(0640,root,root) %{_sysconfdir}/%{name}.conf.example
 %attr(0640,root,root) %config(noreplace) %{_sysconfdir}/%{name}_passwd.cfg
 %{_sbindir}/%{name}
-%dir %{_localstatedir}/%{name}
+%dir %{_localstatedir}/lib/%{name}
 %dir %{_var}/run/%{name}
 

@@ -1,7 +1,7 @@
 Summary:	A SIP masquerading proxy with RTP support
 Name:		siproxd
-Version:	0.7.1
-Release:	%mkrel 3
+Version:	0.7.2
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		System/Servers
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot

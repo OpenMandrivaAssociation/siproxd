@@ -4,7 +4,7 @@ Version:	0.7.2
 Release:	3
 License:	GPLv2+
 Group:		System/Servers
-URL:		http://siproxd.sourceforge.net/
+URL:		https://siproxd.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/siproxd/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 Requires(post): rpm-helper
